@@ -16,11 +16,11 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.get('/search', function(req, res, next) {
+router.get('/tweets', function(req, res, next) {
   twitterClient.get('search/tweets', { q: "sentiments"}, function(error, tweets, response){
     if (error) throw error;
-    console.log(tweets);
-    console.log(response);
+    //console.log(tweets);
+    //console.log(response);
     res.send(tweets);
   });
 });
