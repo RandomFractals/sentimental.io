@@ -12,7 +12,13 @@ var twitterClient = new Twitter({
 
 
 router.get('/app/tweets', function(req, res, next) {
-  twitterClient.get('search/tweets', { q: "sentiments"}, function(error, tweets, response){
+  twitterClient.get('search/tweets', 
+    { 
+      q: "sentiments",
+      count: "2"
+    }, 
+    
+    function(error, tweets, response){
     if (error) throw error;
     //console.log(tweets);
     //console.log(response);
