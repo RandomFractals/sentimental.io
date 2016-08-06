@@ -5,8 +5,8 @@ import { TwitterService } from './services/twitter.service';
 
 @Component({
   selector: 'tweets',
-  templateUrl: 'app/tweetList.html',
-  styleUrls: ['app/tweetList.css']
+  templateUrl: 'app/tweets.html',
+  styleUrls: ['app/tweets.css']
 })
 
 export class TweetList implements OnInit {

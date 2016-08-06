@@ -20,15 +20,15 @@ import { TweetList } from './tweets';
 
 @RouteConfig([
   {
-    path: '/followers',
-    name: 'Followers',
-    component: FollowerList
-  },
-  {
-    path: '/tweets',
+    path: '/',
     name: 'Tweets',
     component: TweetList,
     useAsDefault: true
+  },  
+  {
+    path: '/followers',
+    name: 'Followers',
+    component: FollowerList
   }
 ])
 

@@ -10,18 +10,13 @@ var twitterClient = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
 
-
-router.get('/tweets', function(req, res, next) {
+router.get('/app/tweets', function(req, res, next) {
   twitterClient.get('search/tweets', { q: "sentiments"}, function(error, tweets, response){
     if (error) throw error;
     //console.log(tweets);
     //console.log(response);
-    res.send(tweets);
+    res.send(tweets.statuses);
   });
 });
 

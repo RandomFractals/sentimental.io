@@ -4,7 +4,7 @@ import { TwitterService } from './services/twitter.service';
 import { User } from './models/user';
 
 @Component({
-  selector: 'corc-followers',
+  selector: 'followers',
   templateUrl: 'app/followers.html',
   styleUrls: [ 'app/followers.css' ]
 })
