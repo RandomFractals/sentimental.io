@@ -3,7 +3,6 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from '@angular/router-deprecated';
 
 import { TwitterService } from './services/twitter.service';
-import { FollowerList } from './followers';
 import { TweetList } from './tweets';
 
 @Component({
@@ -24,11 +23,6 @@ import { TweetList } from './tweets';
     name: 'Tweets',
     component: TweetList,
     useAsDefault: true
-  },  
-  {
-    path: '/followers',
-    name: 'Followers',
-    component: FollowerList
   }
 ])
 
