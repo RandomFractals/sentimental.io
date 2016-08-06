@@ -33,12 +33,15 @@ router.get('/app/tweets', function(req, res, next) {
   });
 
   // test alchemy hookup
-  alchemyLangClient.sentiment({text: 'Word on the street Watson is good at text analytics'}, 
+  var msg = "I'm getting sick of putting these demo apps together & doing @\n || @exercism_io 4 ur tests. It's silly! I'm Boss when it comes 2 code";
+  alchemyLangClient.sentiment({text: msg}, 
     function (err, response) {
       if (err)
         console.log('error:', err);
-      else
+      else {
+        console.log('Alchemy Lang API input: \n"' + msg + '"\n Response: \n');
         console.log(JSON.stringify(response, null, 2));
+       }
     });
 
 });
