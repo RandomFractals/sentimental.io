@@ -24,7 +24,7 @@ router.get('/app/tweets', function(request, response, next) {
   var query = 'TarasNovak';
 
   // TODO: bump it to 100 after front-end is finalized
-  var maxCount = 2; // while testing
+  var maxCount = 20; // while testing
 
   // get tweets 
   getTweets(query, maxCount, response); 
