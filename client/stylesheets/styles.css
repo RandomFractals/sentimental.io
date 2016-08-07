@@ -254,7 +254,7 @@ a {
 }
 
 .grey-box, .unknown {
-	background-color: #666;
+	background-color: #999;
 	border: solid 1px #AACFE4;	
 }
 
@@ -288,7 +288,7 @@ a {
 }
 
 .grey, .unknown {
-	fill: #666;
+	fill: #999;
 }
 
 /* graph styles */
