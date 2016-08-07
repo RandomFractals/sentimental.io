@@ -155,7 +155,7 @@ a {
 	border: 0px;	
  	border-top: solid 1px #ccc;
 	background-color: #fff;
-	margin: 0px;
+	margin: 10px;
 	padding: 0px;	
 	width: 100%;
 }
@@ -217,9 +217,10 @@ a {
 }
 
 .legend-box {
-	width: 10px;
-	height: 10px;
-	margin-left: 5px;
+	width: 8px;
+	height: 48px;
+	margin: 0px;
+	padding: 0px;
 	display: inline-block;
 }
 
@@ -227,7 +228,7 @@ a {
 	font-size: 0.8em;	
 }
 
-.red-box {	
+.red-box, .negative {	
 	background-color: #f00;
 	border: solid 1px #AACFE4;	
 }
@@ -237,12 +238,12 @@ a {
 	border: solid 1px #AACFE4;	
 }
 
-.green-box {
+.green-box, .positive {
 	background-color: #0c0;
 	border: solid 1px #AACFE4;	
 }
 
-.blue-box {
+.blue-box, .neutral {
 	background-color: #06f;
 	border: solid 1px #AACFE4;	
 }
@@ -252,12 +253,17 @@ a {
 	border: solid 1px #AACFE4;	
 }
 
+.grey-box, .unknown {
+	background-color: #666;
+	border: solid 1px #AACFE4;	
+}
+
 .bar {
 	stroke-width: 1px;
 	stroke: #666;
 }
 
-.red {
+.red, .negative {
 	color: #f00;
 	fill: #f00;
 }
@@ -267,18 +273,22 @@ a {
 	fill: #f60;
 }
 
-.green {
+.green, .positive {
 	color: #0c0;
 	fill: #0c0;
 }
 
-.blue {
+.blue, .neutral {
 	color: #06f;
 	fill: #39f;
 }
 
 .yellow {
 	fill: #ff0;
+}
+
+.grey, .unknown {
+	fill: #666;
 }
 
 /* graph styles */

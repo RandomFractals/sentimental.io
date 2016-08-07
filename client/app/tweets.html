@@ -1,18 +1,23 @@
 <div id="list" class="data-list" *ngFor="let tweet of tweets">
   <div>
     <div class="list-item">
+      <div class="legend">
+        <div class="legend-box {{tweet.sentiment.type}}"></div>
+      </div>      
       <a class="list-item-link" 
         href="https://www.twitter.com/{{tweet.user.screen_name}}" 
         title="{{tweet.sentiment.type}} | score: {{tweet.sentiment.score * 100}}%">
         <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}">
       </a>
+      <br />
+      <div class="legend">
+        <span>{{tweet.user.name}}</span> |
+        <span class="label">{{tweet.user.followers_count}} followers</span>
+        <!-- | 
+        <span class="col-sm-3">{{tweet.created_at | twitterDateWithTime}}</span>
+        -->            
+      </div>            
     </div>
-    <div class="col-sm-3">{{tweet.user.name}}</div>
-    <div class="col-sm-2 label">{{tweet.user.followers_count}} followers</div>
-    <div class="col-sm-2 label">{{tweet.sentiment.type}}:{{tweet.sentiment.score}}</div>   
-    <!-- 
-    <div class="col-sm-3">{{tweet.created_at | twitterDateWithTime}}</div>
-    -->    
   </div>
   <div class="row">
     <div class="col-sm-12 tweet-text">{{tweet.text}}</div>

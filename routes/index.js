@@ -21,7 +21,7 @@ var alchemyClient = Watson.alchemy_language({
 // Expose tweets endpoint for ang2 app
 router.get('/app/tweets', function(request, response, next) {
   // TODO: inject search query from client
-  var query = 'sentiments';
+  var query = 'TarasNovak';
 
   // TODO: bump it to 100 after front-end is finalized
   var maxCount = 2; // while testing
