@@ -20,7 +20,7 @@ var alchemyClient = Watson.alchemy_language({
 // Expose tweets endpoint for ang2 app
 router.get('/app/tweets', function(request, response, next) {
   // TODO: inject search query from client
-  var query = 'sentiments'; 
+  var query = 'test'; 
 
   // TODO: bump it to 100 after front-end is finalized
   var maxCount = 2; // while testing
@@ -39,16 +39,19 @@ function getTweets(query, count, httpResponse) {
       q: query, 
       count: count
     }, 
-    function(error, tweets, response){
+    function(error, tweets, response){      
       if (error) {
         console.log(error);
-        throw error;
+        return posts;
       } else {
-        posts = tweets.statuses;
+        tweets.statuses.forEach( function(post) {
+          posts.push(post);
+          // run it through Alchemy sentiments api
+          getSentiment(post);
+          log('getTweets::sentiment: ', post.sentiment);                    
+        }, this);
 
-        // test alchemy hookup
-        //getSentiment('test');
-
+        // return twitter results with sentiments scores
         httpResponse.send(posts);        
       }      
   });
@@ -59,19 +62,29 @@ function getTweets(query, count, httpResponse) {
 /**
  * Gets text sentiment from Watson Alchemy Lang API.
  */
-function getSentiment(msg) {
-  console.log('getSentiment::text: ' + msg);
+function getSentiment(post) {
+  console.log('getSentiment::text: ' + post.text);
   alchemyClient.sentiment({
-      text: msg
+      text: post.text
     }, 
     function (error, response) {
       if (error)
         console.log('getSentiment::error: ', error);
-      else {
-        console.log(JSON.stringify(response, null, 2));
+      else {        
+        post.sentiment = response.docSentiment;
+        log('getSentiment::response: ', response.docSentiment);        
        }
        return response;
     });  
 }
+
+
+/**
+ * Quick obj log func.
+ */
+function log(msg, obj) {
+  console.log(msg + JSON.stringify(obj, null, 2) );         
+}
+
 
 module.exports = router;
