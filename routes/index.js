@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var async = require('async');
 var Twitter = require('twitter');
 var Watson = require('watson-developer-cloud');
 
@@ -20,7 +21,7 @@ var alchemyClient = Watson.alchemy_language({
 // Expose tweets endpoint for ang2 app
 router.get('/app/tweets', function(request, response, next) {
   // TODO: inject search query from client
-  var query = 'test'; 
+  var query = 'sentiments';
 
   // TODO: bump it to 100 after front-end is finalized
   var maxCount = 2; // while testing
@@ -35,47 +36,52 @@ router.get('/app/tweets', function(request, response, next) {
  */
 function getTweets(query, count, httpResponse) {
   var posts = [];
-  twitterClient.get('search/tweets', { 
-      q: query, 
-      count: count
-    }, 
-    function(error, tweets, response){      
+  twitterClient.get('search/tweets', {q: query, count: count}, 
+    function(error, tweets, response) {
       if (error) {
         console.log(error);
         return posts;
       } else {
-        tweets.statuses.forEach( function(post) {
-          posts.push(post);
-          // run it through Alchemy sentiments api
-          getSentiment(post);
-          log('getTweets::sentiment: ', post.sentiment);                    
-        }, this);
+        // TODO: do some error checking here first
+        posts = tweets.statuses;
 
-        // return twitter results with sentiments scores
-        httpResponse.send(posts);        
-      }      
+        // let's async to get Alchemy sentiments from Watson 
+        async.each(posts, getSentiment, function (err) {
+          if (err) {
+            console.log(err);
+            //return next(err);
+          } 
+
+          console.log('got sentiments!');          
+          httpResponse.send(posts);
+        });        
+      } 
   });
 
 } // end of getTweets()
 
 
 /**
- * Gets text sentiment from Watson Alchemy Lang API.
+ * Gets text sentiment from Watson Alchemy Lang API,
+ * and adds it to the post.
  */
-function getSentiment(post) {
+function getSentiment(post, callback) {
   console.log('getSentiment::text: ' + post.text);
-  alchemyClient.sentiment({
-      text: post.text
-    }, 
+  alchemyClient.sentiment( 
+    {text: post.text}, 
     function (error, response) {
-      if (error)
-        console.log('getSentiment::error: ', error);
+      if (error) {
+        post.sentiment = {type: 'unknown'};
+        console.log('getSentiment::error: ', error);                
+      }
       else {        
         post.sentiment = response.docSentiment;
         log('getSentiment::response: ', response.docSentiment);        
        }
-       return response;
-    });  
+      // callback to let async know we are done with this task
+      callback();
+    }
+  );
 }
 
 
