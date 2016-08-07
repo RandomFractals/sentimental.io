@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Tweet } from './models/tweet';
 import { TwitterService } from './services/twitter.service';
+import { TwitterDateWithTimePipe } from './utils/twitter.date.pipe';
+
 
 @Component({
   selector: 'tweets',
