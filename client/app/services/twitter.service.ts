@@ -50,6 +50,7 @@ export class TwitterService {
       let user = data[item];
       let userData: User = {
         name: user.name,
+        screen_name: user.screen_name,
         location: user.location,
         profile_image_url: user.profile_image_url,
         created_at: user.created_at,
