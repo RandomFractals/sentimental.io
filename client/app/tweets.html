@@ -1,7 +1,9 @@
-<div *ngFor="let tweet of tweets">
-  <div class="row">
-    <div class="col-sm-1">
-      <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}">
+<div id="list" class="data-list" *ngFor="let tweet of tweets">
+  <div>
+    <div class="list-item">
+      <a class="list-item-link" href="https://www.twitter.com/{{tweet.user.screen_name}}">
+        <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}">
+      </a>
     </div>
     <div class="col-sm-3">{{tweet.user.name}}</div>
     <div class="col-sm-2 label">{{tweet.user.followers_count}} followers</div>

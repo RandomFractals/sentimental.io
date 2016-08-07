@@ -131,37 +131,6 @@ a {
   text-decoration: none;	
 }
 
-.menu {
-	margin: 0px;
-	margin-left: 2px;
-	padding: 0px;
-	list-style-type: none;	
-}
-
-.menu li {
-	display: inline;
-	line-height: 50px;
-	margin: 0px;
-	padding: 0px;	
-}
-
-.menu li a {
-	background-color: #39f;
-	color: #fff;	
-  border: 0px;
-	font-size: 0.9em;	
-	font-weight: normal;	
-	margin: 0px;
-  padding: 15px;
-  text-decoration: none;
-}
-
-.menu li a:hover, .menu li[class=active]  a {
-	background-color: #f60;
-	color: #fff;
-}
-
-
 /* data list item styles */
 .data-list {
 	margin: 0px;
