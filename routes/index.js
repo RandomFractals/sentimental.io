@@ -4,6 +4,7 @@ var path = require('path');
 var Twitter = require('twitter');
 var Watson = require('watson-developer-cloud');
 
+// Create Twitter client rest instance
 var twitterClient = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
   consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
@@ -11,39 +12,66 @@ var twitterClient = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
 
-
-var alchemyLangClient = Watson.alchemy_language({
+// Create Watson Alchemy Language api client instance
+var alchemyClient = Watson.alchemy_language({
   api_key: process.env.ALCHEMY_API_KEY
 });
 
-router.get('/app/tweets', function(req, res, next) {
+// Expose tweets endpoint for ang2 app
+router.get('/app/tweets', function(request, response, next) {
+  // TODO: inject search query from client
+  var query = 'sentiments'; 
 
-  // get tweets
-  twitterClient.get('search/tweets', 
-    { 
-      q: "sentiments",
-      count: "2"
+  // TODO: bump it to 100 after front-end is finalized
+  var maxCount = 2; // while testing
+
+  // get tweets 
+  getTweets(query, maxCount, response); 
+});
+
+
+/**
+ * Gets Twitter search results.
+ */
+function getTweets(query, count, httpResponse) {
+  var posts = [];
+  twitterClient.get('search/tweets', { 
+      q: query, 
+      count: count
     }, 
-
     function(error, tweets, response){
-    if (error) throw error;
-    //console.log(tweets);
-    //console.log(response);
-    res.send(tweets.statuses);
+      if (error) {
+        console.log(error);
+        throw error;
+      } else {
+        posts = tweets.statuses;
+
+        // test alchemy hookup
+        //getSentiment('test');
+
+        httpResponse.send(posts);        
+      }      
   });
 
-  // test alchemy hookup
-  var msg = "I'm getting sick of putting these demo apps together & doing @\n || @exercism_io 4 ur tests. It's silly! I'm Boss when it comes 2 code";
-  alchemyLangClient.sentiment({text: msg}, 
-    function (err, response) {
-      if (err)
-        console.log('error:', err);
+} // end of getTweets()
+
+
+/**
+ * Gets text sentiment from Watson Alchemy Lang API.
+ */
+function getSentiment(msg) {
+  console.log('getSentiment::text: ' + msg);
+  alchemyClient.sentiment({
+      text: msg
+    }, 
+    function (error, response) {
+      if (error)
+        console.log('getSentiment::error: ', error);
       else {
-        console.log('Alchemy Lang API input: \n"' + msg + '"\n Response: \n');
         console.log(JSON.stringify(response, null, 2));
        }
-    });
-
-});
+       return response;
+    });  
+}
 
 module.exports = router;
