@@ -7,4 +7,5 @@ export class Tweet {
     followers_count: string;
   };
   text: string;
+  sentiment: any;  
 }

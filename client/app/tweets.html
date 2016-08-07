@@ -5,6 +5,7 @@
     </div>
     <div class="col-sm-3">{{tweet.user.name}}</div>
     <div class="col-sm-2 label">{{tweet.user.followers_count}} followers</div>
+    <div class="col-sm-2 label">{{tweet.sentiment.type}}:{{tweet.sentiment.score}}</div>    
   </div>
   <div class="row">
     <div class="col-sm-12 tweet-text">{{tweet.text}}</div>
