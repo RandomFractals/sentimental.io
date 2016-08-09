@@ -1,16 +1,8 @@
 body {
-  font: 10pt "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
-body {
 	background-color: #fff;
 	color: #000000;	
 	font-family: 'Istok Web', Helvetica, Arial, FreeSans, sans-serif;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	margin: 0px;
 }
 
@@ -126,7 +118,8 @@ span {
 /* menu link styles */
 a {
 	color: #06f;
-  text-decoration: none;	
+  	text-decoration: none;
+	font-size: 8pt;
 }
 
 /* data list item styles */
@@ -223,7 +216,7 @@ a {
 
 .legend-box {
 	width: 8px;
-	height: 48px;	
+	height: 32px;	
 	margin: 0px;
 	padding: 0px;
 	display: inline-block;

@@ -5,13 +5,17 @@
       <a class="list-item-link" 
         href="https://www.twitter.com/{{tweet.user.screen_name}}" 
         title="{{tweet.sentiment.type}} | score: {{tweet.sentiment.score * 100}}%">
-        <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}">
+        <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}" width="32" height="32">
       </a>
       <p>{{tweet.text}}</p>
     </div>
     <div class="list-item-footer">
-      <span>{{tweet.user.name}}</span> |
-      <span class="label">{{tweet.user.followers_count}} followers</span>
+      <a  
+        href="https://www.twitter.com/{{tweet.user.screen_name}}" 
+        title="{{tweet.user.name}}">
+        @{{tweet.user.name}}
+      </a>
+      <span class="label">| {{tweet.user.followers_count}} followers</span>
       <!-- | 
       <span class="col-sm-3">{{tweet.created_at | twitterDateWithTime}}</span>
       -->
