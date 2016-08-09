@@ -153,10 +153,13 @@ a {
 	border: 0px;	
  	border-top: solid 1px #ccc;
 	background-color: #fff;
-	margin: 10px 10px 0px 10px;	
-	padding: 0px;	
+	padding: 5px;	
 	width: 100%;
 	display: inline-block;
+}
+
+.list-item-footer {
+	padding: 0px;	
 }
 
 .list-item-text {
@@ -165,8 +168,7 @@ a {
 	font-size: 0.9em;
 	font-weight: bold;
 	margin: 0px;
-	padding: 5px;
-	display: inline;
+	padding: 0px;
 }
 
 .map-link, .list-item-link {
@@ -212,9 +214,11 @@ a {
 }
 
 .legend {
-	display: inline;
 	margin: 0px;
 	padding: 0px;
+	width: 8px;
+	height: 48px;
+	overflow: hidden;
 }
 
 .legend-box {
@@ -231,32 +235,26 @@ a {
 
 .red-box, .negative {	
 	background-color: #f00;
-	border: solid 1px #AACFE4;	
 }
 
 .orange-box {
 	background-color: #f60;
-	border: solid 1px #AACFE4;	
 }
 
 .green-box, .positive {
 	background-color: #0c0;
-	border: solid 1px #AACFE4;	
 }
 
 .blue-box, .neutral {
 	background-color: #06f;
-	border: solid 1px #AACFE4;	
 }
 
 .yellow-box {
 	background-color: #ff0;
-	border: solid 1px #AACFE4;	
 }
 
 .grey-box, .unknown {
 	background-color: #999;
-	border: solid 1px #AACFE4;	
 }
 
 .bar {
