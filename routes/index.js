@@ -24,7 +24,7 @@ router.get('/app/tweets', function(request, response, next) {
   var query = 'TarasNovak';
 
   // TODO: bump it to 100 after front-end is finalized
-  var maxCount = 20; // while testing
+  var maxCount = 2; // while testing
 
   // get tweets 
   getTweets(query, maxCount, response); 
@@ -66,7 +66,7 @@ function getTweets(query, count, httpResponse) {
  * and adds it to the post.
  */
 function getSentiment(post, callback) {
-  console.log('getSentiment::text: ' + post.text);
+  //console.log('getSentiment::text: ' + post.text);
   alchemyClient.sentiment( 
     {text: post.text}, 
     function (error, response) {
