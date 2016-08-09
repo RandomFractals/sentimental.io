@@ -76,7 +76,7 @@ function getSentiment(post, callback) {
       }
       else {        
         post.sentiment = response.docSentiment;
-        log('getSentiment::response: ', response.docSentiment);        
+        //log('getSentiment::response: ', response.docSentiment);        
        }
       // callback to let async know we are done with this task
       callback();
