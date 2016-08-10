@@ -8,9 +8,9 @@ IBM Watson Alchemy Language Machine Learning API demo app for analyzing tweet se
 
 >npm install 
 
-# Save .env.template as .env for Twitter and Alchemy services config
+# Save .env.template as .env for services config
 
-Follow links and instructions in .env.template for procruing Twitter and Alchemy API keys
+Follow links and instructions in .env.template for procuring Twitter and Alchemy API keys
 
 # Start node.js app
 
