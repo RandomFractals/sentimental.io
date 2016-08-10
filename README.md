@@ -8,7 +8,7 @@ IBM Watson Alchemy Language Machine Learning API demo app for analyzing tweet se
 
 >npm install 
 
-# Save .env.template as .env for your local sentimental.io config and deployment
+# Save .env.template as .env for Twitter and Alchemy services config
 
 Follow links and instructions in .env.template for procruing Twitter and Alchemy API keys
 
