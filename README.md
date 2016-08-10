@@ -6,11 +6,13 @@ IBM Watson Alchemy Language Machine Learning API demo app for analyzing tweet se
 
 # How to build
 
-Run >npm install 
+Run 
+
+>npm install 
 
 # Create .env for your local sentimental.io deployment with .env.template
 
-# How to Run
+# Start node.js app
 
 >npm start
 
