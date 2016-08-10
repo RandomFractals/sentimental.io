@@ -4,19 +4,19 @@ IBM Watson Alchemy Language Machine Learning API demo app for analyzing tweet se
 ![Alt text](https://github.com/RandomFractals/sentimental.io/blob/master/screens/DataScienceSentimentalIOScreenGrabV1.png?raw=true 
  "Sentimental.io Veiw Screenshot")
 
-# How to build
-
-Run 
+# Build
 
 >npm install 
 
-# Create .env for your local sentimental.io deployment with .env.template
+# Copy .env.template file to .env for your local sentimental.io config and deployment
+
+follow links and instructions in .env.template for procruing Twitter and Alchemy API keys
 
 # Start node.js app
 
 >npm start
 
-# Client dev
+# Client Dev with auto TS and the rest recompile
 
 >cd client
 
