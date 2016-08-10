@@ -17,4 +17,5 @@ Run >npm install
 # Client dev
 
 >cd client
->npm start
+
+client>npm start
