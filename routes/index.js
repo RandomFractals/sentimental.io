@@ -19,15 +19,15 @@ var alchemyClient = Watson.alchemy_language({
 });
 
 // Expose tweets endpoint for ang2 app
-router.get('/app/tweets', function(request, response, next) {
-  // TODO: inject search query from client
+router.get('/app/tweets/:query?', function(request, response, next) {
+  // inject search query from client
   var query = 'Data Science';
-
-  // TODO: bump it to 100 after front-end is finalized
-  var maxCount = 20; // while testing
+  if (request.params.query) {
+    query = request.params.query;
+  }
 
   // get tweets 
-  getTweets(query, maxCount, response); 
+  getTweets(query, process.env.TWITTER_MAX_COUNT, response); 
 });
 
 
@@ -52,7 +52,7 @@ function getTweets(query, count, httpResponse) {
             //return next(err);
           } 
 
-          console.log('got sentiments!');          
+          console.log('getTweets::got sentiments for query: ' + query);          
           httpResponse.send(posts);
         });        
       } 

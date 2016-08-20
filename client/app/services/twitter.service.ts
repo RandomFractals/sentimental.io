@@ -13,8 +13,8 @@ export class TwitterService {
   /**
    * Gets test tweets.
    */
-  getTweets(): Observable<Tweet[]> {
-    return this.http.get('app/tweets')
+  getTweets(query): Observable<Tweet[]> {
+    return this.http.get(`app/tweets/${query}`)
                     .map(this.processTweets)
                     .catch(this.handleError);
   }

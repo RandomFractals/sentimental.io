@@ -19,7 +19,7 @@ export class TweetList implements OnInit {
   constructor(private _TwitterService: TwitterService) { }
 
   ngOnInit() {
-    this._TwitterService.getTweets()
+    this._TwitterService.getTweets('')
       .subscribe(
          tweets => this.tweets = tweets,
          error =>  this.errorMessage = <any>error);
