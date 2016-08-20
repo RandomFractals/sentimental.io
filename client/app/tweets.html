@@ -4,7 +4,7 @@
       <div class="legend-box {{tweet.sentiment.type}}"></div>
       <a class="list-item-link" 
         href="https://www.twitter.com/{{tweet.user.screen_name}}" 
-        title="{{tweet.sentiment.type}} | score: {{tweet.sentiment.score * 100}}%">
+        title="{{tweet.sentiment.type}} | score: {{(tweet.sentiment.score * 100) | round: 1}}%">
         <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}" width="32" height="32">
       </a>
       <p>{{tweet.text}}</p>

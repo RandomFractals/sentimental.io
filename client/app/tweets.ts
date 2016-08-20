@@ -2,13 +2,15 @@ import { Component, OnInit } from '@angular/core';
 
 import { Tweet } from './models/tweet';
 import { TwitterService } from './services/twitter.service';
+import { RoundPipe } from './utils/round.pipe';
 import { TwitterDateWithTimePipe } from './utils/twitter.date.pipe';
 
 
 @Component({
   selector: 'tweets',
   templateUrl: 'app/tweets.html',
-  styleUrls: ['app/tweets.css']
+  styleUrls: ['app/tweets.css'],
+  pipes: [RoundPipe]
 })
 
 export class TweetList implements OnInit {
