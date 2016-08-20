@@ -3,8 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Tweet } from './models/tweet';
 import { TwitterService } from './services/twitter.service';
 import { RoundPipe } from './utils/round.pipe';
-import { TwitterDateWithTimePipe } from './utils/twitter.date.pipe';
-
 
 @Component({
   selector: 'tweets',
@@ -12,7 +10,6 @@ import { TwitterDateWithTimePipe } from './utils/twitter.date.pipe';
   styleUrls: ['app/tweets.css'],
   pipes: [RoundPipe]
 })
-
 export class TweetList implements OnInit {
   errorMessage: string;
   tweets: Tweet[];

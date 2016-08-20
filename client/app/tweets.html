@@ -15,10 +15,8 @@
         title="{{tweet.user.name}}">
         @{{tweet.user.name}}
       </a>
-      <span class="label">| {{tweet.user.followers_count}} followers</span>
-      <!-- | 
-      <span class="col-sm-3">{{tweet.created_at | twitterDateWithTime}}</span>
-      -->
+      <span class="label">| {{tweet.user.followers_count}} followers</span>       
+      <span class="label">| {{tweet.created_at | date:'medium'}}</span>
     </div>
   </li>
 </ul>
