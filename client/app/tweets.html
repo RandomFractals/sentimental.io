@@ -10,10 +10,10 @@
       <p [innerHtml]="tweet.text | link"></p>
     </div>
     <div class="list-item-footer">
-      <a  
+      <a class="user-link"  
         href="https://www.twitter.com/{{tweet.user.screenName}}" 
         title="{{tweet.user.name}}" target="_blank">
-        @{{tweet.user.name}}
+        {{tweet.user.name}}
       </a>
       <span class="label">| {{tweet.user.followersCount}} followers</span>       
       <span class="label">| {{tweet.createdAt | date:'medium'}}</span>
