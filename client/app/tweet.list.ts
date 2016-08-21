@@ -7,8 +7,8 @@ import { RoundPipe } from './utils/round.pipe';
 
 @Component({
   selector: 'tweets',
-  templateUrl: 'app/tweets.html',
-  styleUrls: ['app/tweets.css'],
+  templateUrl: 'app/tweet.list.html',
+  styleUrls: ['app/tweet.list.css'],
   pipes: [LinkPipe, RoundPipe]
 })
 export class TweetList implements OnInit {
