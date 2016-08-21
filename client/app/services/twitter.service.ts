@@ -8,12 +8,16 @@ import { User } from '../models/user';
 
 @Injectable()
 export class TwitterService {
-  constructor (private http: Http) {}
+
+  constructor (private http: Http) {
+  }
 
   /**
    * Gets test tweets.
    */
-  getTweets(query): Observable<Tweet[]> {
+  getTweets(query = ''): Observable<Tweet[]> 
+  {
+    console.log(`getTweets: ${query}`)    
     return this.http.get(`app/tweets/${query}`)
                     .map(this.processTweets)
                     .catch(this.handleError);
@@ -33,17 +37,18 @@ export class TwitterService {
   /**
    * Creates tweets list from raw json tweets data.
    */
-  private processTweets(res: Response) {
-    let data = res.json();
-    return data || {};
+  private processTweets(response: Response) {
+    let data = response.json();
+    //console.log(data);
+    return data || [];
   }
 
 
   /**
    * Creates user list from raw json users data.
    */
-  private processUsers(res: Response) {
-    let data = res.json();
+  private processUsers(response: Response) {
+    let data = response.json();
     let users: User[] = [];
 
     for (var item in data){
