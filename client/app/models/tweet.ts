@@ -11,13 +11,13 @@ export class Tweet {
   sentiment: any;
 
   // raw JSON data
-  private _tweetData:any;
+  data:any;
 
   constructor (tweetData:any) {
     this.user = new User(tweetData.user);
     this.text = tweetData.text.valueOf();
     this.createdAt = new Date(tweetData.created_at);
     this.sentiment = tweetData.sentiment;
-    this._tweetData = tweetData;
+    this.data = tweetData;
   }  
 }

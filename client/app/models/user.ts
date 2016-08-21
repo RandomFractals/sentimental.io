@@ -11,7 +11,7 @@ export class User {
   followersCount: number;
 
   // raw JSON data
-  private _userData:any;
+  data:any;
 
   constructor (userData:any) {
     this.name = userData.name;
@@ -20,6 +20,6 @@ export class User {
     this.profileImageUrl = userData.profile_image_url;
     this.createdAt = new Date(userData.created_at);
     this.followersCount = Number(userData.followers_count);
-    this._userData = userData;
+    this.data = userData;
   }
 }
