@@ -19,6 +19,12 @@ export class LinkPipe implements PipeTransform {
       return `<a href="https://www.twitter.com/${user.substring(1).replace(':', '')}" target="_blank">${user}</a>`;
     });
 
+    // rewrite hashtags
+    let hashTagRegEx = /(\#[^\s]+)/g;
+    text = text.replace( hashTagRegEx, function(hashTag) {
+      return `<a href="https://www.twitter.com/${hashTag}" target="_blank">${hashTag}</a>`;
+    });
+
    return text; 
   }
 }
