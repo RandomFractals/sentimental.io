@@ -36,6 +36,7 @@ router.get('/app/tweets/:query?', function(request, response, next) {
  */
 function getTweets(query, count, httpResponse) {
   var posts = [];
+  console.log('getTweets::query: ' + query);
   twitterClient.get('search/tweets', {q: query, count: count}, 
     function(error, tweets, response) {
       if (error) {
@@ -44,7 +45,7 @@ function getTweets(query, count, httpResponse) {
       } else {
         // TODO: do some error checking here first
         posts = tweets.statuses;
-
+        log('getTweets', posts);
         // let's async to get Alchemy sentiments from Watson 
         async.each(posts, getSentiment, function (err) {
           if (err) {
