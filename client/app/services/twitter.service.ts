@@ -38,9 +38,14 @@ export class TwitterService {
    * Creates tweets list from raw json tweets data.
    */
   private processTweets(response: Response) {
-    let data = response.json();
-    //console.log(data);
-    return data || [];
+    let results = response.json();
+    let tweets: Tweet[] = []
+    results.forEach(tweet => { 
+      tweets.push(new Tweet(tweet));
+      console.log(tweet);
+    });    
+    console.log(tweets);
+    return tweets;
   }
 
 
@@ -48,21 +53,12 @@ export class TwitterService {
    * Creates user list from raw json users data.
    */
   private processUsers(response: Response) {
-    let data = response.json();
+    let results = response.json();
     let users: User[] = [];
-
-    for (var item in data){
-      let user = data[item];
-      let userData: User = {
-        name: user.name,
-        screen_name: user.screen_name,
-        location: user.location,
-        profile_image_url: user.profile_image_url,
-        created_at: user.created_at,
-        followers_count: user.followers_count
-      };
-      users.push(userData);
-    }
+    results.forEach(user => { 
+      users.push(new User(user));
+      console.log(user);
+    });    
     return users;
   }
 

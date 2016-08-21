@@ -3,20 +3,20 @@
     <div class="list-item">
       <div class="legend-box {{tweet.sentiment.type}}"></div>
       <a class="list-item-link" 
-        href="https://www.twitter.com/{{tweet.user.screen_name}}" 
+        href="https://www.twitter.com/{{tweet.user.screenName}}" 
         title="{{tweet.sentiment.type}} | score: {{(tweet.sentiment.score * 100) | round: 1}}%">
-        <img src="{{tweet.user.profile_image_url}}" alt="{{tweet.user.name}}" width="32" height="32">
+        <img src="{{tweet.user.profileImageUrl}}" alt="{{tweet.user.name}}" width="32" height="32">
       </a>
       <p>{{tweet.text}}</p>
     </div>
     <div class="list-item-footer">
       <a  
-        href="https://www.twitter.com/{{tweet.user.screen_name}}" 
+        href="https://www.twitter.com/{{tweet.user.screenName}}" 
         title="{{tweet.user.name}}">
         @{{tweet.user.name}}
       </a>
-      <span class="label">| {{tweet.user.followers_count}} followers</span>       
-      <span class="label">| {{tweet.created_at | date:'medium'}}</span>
+      <span class="label">| {{tweet.user.followersCount}} followers</span>       
+      <span class="label">| {{tweet.createdAt | date:'medium'}}</span>
     </div>
   </li>
 </ul>
