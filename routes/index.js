@@ -45,7 +45,7 @@ function getTweets(query, count, httpResponse) {
       } else {
         // TODO: do some error checking here first
         posts = tweets.statuses;
-        log('getTweets', posts);
+        //log('getTweets', posts);
         // let's async to get Alchemy sentiments from Watson 
         async.each(posts, getSentiment, function (err) {
           if (err) {
