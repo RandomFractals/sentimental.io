@@ -18,6 +18,9 @@ export class TwitterService {
   // last search term
   private _searchTerm:string = 'Data Science'; // default search :)
 
+  // last search response metadata
+  private _searchMetadata:Object = {};
+
   // last tweet id for pagination
   static LastTweetId:number = -1; 
 
@@ -74,14 +77,15 @@ export class TwitterService {
    * Creates tweets list from raw json tweets data.
    */
   private processTweets(response: Response) {
+    // get json data response
     let results = response.json();
-    let tweets: Tweet[] = []
-    results.forEach(tweetData => {
-      let tweet:Tweet = new Tweet(tweetData);  
-      tweets.push(tweet);
-      //console.log(tweetData);
-    });    
-    //console.log(tweets);
+
+    // get tweets
+    let tweets: Array<Tweet> = new Array<Tweet>();
+    results.searchResults.forEach(tweetData => tweets.push(new Tweet(tweetData)));
+
+    // save search metadata for later data queries 
+    this._searchMetadata = results.searchMetada;
 
     // save last tweet id for pagination
     TwitterService.LastTweetId = tweets[tweets.length-1].id;

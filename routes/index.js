@@ -46,26 +46,34 @@ router.get('/app/tweets/:query?/:maxId?', function(request, response, next) {
  * Gets Twitter search results.
  */
 function getTweets(queryParams, httpResponse) {
-  var posts = [];
   log('getTweets::query: ', queryParams);
+
+  // search twitter
+  var posts = [];  
   twitterClient.get('search/tweets', queryParams, 
     function(error, tweets, response) {
       if (error) {
         console.log(error);
-        return posts;
+        return posts; // error ???
       } else {
+        // log twitter search results metadata
+        log('getTweets::searchMetadata: ', tweets.search_metadata);
+
         // TODO: do some error checking here first
         posts = tweets.statuses;
-        log('getTweets::searchMetadata: ', tweets.search_metadata);
+
         // let's async to get Alchemy sentiments from Watson 
         async.each(posts, getSentiment, function (err) {
           if (err) {
             console.log(err);
-            //return next(err);
+            //return next(err); // ???
           } 
 
           log('getTweets::got sentiments for query: ', queryParams);          
-          httpResponse.send(posts);
+          httpResponse.send({
+            searchResults: posts,
+            searchMetadata: tweets.search_metadata
+          });
         });        
       } 
   });
