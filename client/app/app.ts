@@ -20,6 +20,6 @@ export class AppComponent {
   
   search():void {
     console.log(`search: ${this.term}`);
-    this._twitterService.getTweets(this.term);    
+    this._twitterService.search(this.term);
   }
 }
