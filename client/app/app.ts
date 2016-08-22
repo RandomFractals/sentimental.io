@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostListener } from '@angular/core';
 
 import { TwitterService } from './shared/twitter.service'
 
@@ -21,5 +21,14 @@ export class AppComponent {
   search():void {
     console.log(`search: ${this.term}`);
     this._twitterService.search(this.term);
+  }
+
+  @HostListener('window:onscroll', ['$event'])
+  onWindowScroll(event) {
+    // TODO: check scrollbar position
+    // and get the next set of tweets if at the bottom of the page
+    let doc = event.target.documentElement;
+    console.log(event);
+    console.log(`scrollTop: ${doc.scrollTop} scrollHeight: ${doc.scrollHeight} clientTop: ${doc.clientTop} clientHeight: ${doc.clientHeight} offsetHeight: ${doc.offsetHeight}`);
   }
 }
