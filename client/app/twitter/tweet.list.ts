@@ -17,34 +17,68 @@ import { RoundPipe } from '../utils/round.pipe';
 })
 export class TweetList implements OnInit {
   errorMessage: string;
-  tweets: Tweet[];
-  searchTerm: string;
+  tweets: Array<Tweet> = new Array<Tweet>();
+  searchTerm:string  = '';
   searchSubscription:Subscription;
 
   constructor(private _twitterService: TwitterService) { 
   }
 
+
+  /**
+   * Subscribes to global search changes
+   * for new twitter search query and results display. 
+   */
   ngOnInit() {
-    // setup search subscription
+    // subscribe to global search changes
     this.searchSubscription = this._twitterService.search$.subscribe(
+      // get new twitter search results
       searchTerm => this.getTweets(searchTerm)
     );
   }    
 
- ngOnDestroy() {
+
+  /**
+   * Unsubscribes from global search change events.
+   */
+  ngOnDestroy() {
     // prevent memory leak when component is destroyed
     this.searchSubscription.unsubscribe();
   }  
 
+
+  /**
+   * Infinite scroll change handler
+   * for loading additional results.
+   */
   onScroll () {
     console.log('tweet.list::scrolled');
+
+    // get additional search results
     this.getTweets(this.searchTerm);
   }
 
+
+  /**
+   * Gets twitter search results for the specified query.
+   */
   private getTweets(query:string = ''):void {
+    if (this.searchTerm !== query) {
+      // reset tweets
+      this.tweets = new Array<Tweet>();
+      // TODO: pop a spinner over this list view
+    }
+
+    // save new query for future list reloads
     this.searchTerm = query;
+
+    // get twitter search results
     this._twitterService.getTweets(query).subscribe(
-         tweets => this.tweets = tweets,
+         //tweets => this.tweets = tweets,
+         tweets => tweets.forEach( tweet => { 
+           this.tweets.push(tweet)
+         }),    
+         // TODO: add error message display to the view
          error => this.errorMessage = <any>error);
   }
 }
