@@ -19,25 +19,36 @@ var alchemyClient = Watson.alchemy_language({
 });
 
 // Expose tweets endpoint for ang2 app
-router.get('/app/tweets/:query?', function(request, response, next) {
+router.get('/app/tweets/:query?/:maxId?', function(request, response, next) {
   // inject search query from client
   var query = 'Data Science';
   if (request.params.query) {
     query = request.params.query;
   }
 
+  // create tweets search query params
+  var queryParams = {
+    q: query,
+    count: process.env.TWITTER_MAX_COUNT
+  }
+
+  if (request.params.maxId) {
+    // add max id to get older tweets
+    queryParams.max_id = request.params.maxId; 
+  }
+
   // get tweets 
-  getTweets(query, process.env.TWITTER_MAX_COUNT, response); 
+  getTweets(queryParams, response); 
 });
 
 
 /**
  * Gets Twitter search results.
  */
-function getTweets(query, count, httpResponse) {
+function getTweets(queryParams, httpResponse) {
   var posts = [];
-  console.log('getTweets::query: ' + query);
-  twitterClient.get('search/tweets', {q: query, count: count}, 
+  log('getTweets::query: ', queryParams);
+  twitterClient.get('search/tweets', queryParams, 
     function(error, tweets, response) {
       if (error) {
         console.log(error);
@@ -53,7 +64,7 @@ function getTweets(query, count, httpResponse) {
             //return next(err);
           } 
 
-          console.log('getTweets::got sentiments for query: ' + query);          
+          log('getTweets::got sentiments for query: ', queryParams);          
           httpResponse.send(posts);
         });        
       } 
