@@ -16,7 +16,7 @@ export class TwitterService {
   search$ = this._searchTermSource.asObservable();
 
   // last search term
-  private _searchTerm:string = '';
+  private _searchTerm:string = 'Data Science'; // default search :)
 
   // last tweet id for pagination
   static LastTweetId:number = -1; 
@@ -79,9 +79,9 @@ export class TwitterService {
     results.forEach(tweetData => {
       let tweet:Tweet = new Tweet(tweetData);  
       tweets.push(tweet);
-      console.log(tweetData);
+      //console.log(tweetData);
     });    
-    console.log(tweets);
+    //console.log(tweets);
 
     // save last tweet id for pagination
     TwitterService.LastTweetId = tweets[tweets.length-1].id;
