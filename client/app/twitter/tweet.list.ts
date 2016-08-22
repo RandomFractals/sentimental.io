@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Subscription} from 'rxjs/Subscription';
+import { InfiniteScroll } from 'angular2-infinite-scroll';
 
 import { Tweet } from './tweet';
 import { TwitterService } from '../shared/twitter.service';
@@ -9,6 +10,7 @@ import { RoundPipe } from '../utils/round.pipe';
 
 @Component({
   selector: 'tweets',
+  directives: [InfiniteScroll],
   templateUrl: 'app/twitter/tweet.list.html',
   styleUrls: ['app/twitter/tweet.list.css'],
   pipes: [LinkPipe, RoundPipe]
@@ -33,6 +35,10 @@ export class TweetList implements OnInit {
     // prevent memory leak when component is destroyed
     this.searchSubscription.unsubscribe();
   }  
+
+  onScroll () {
+    console.log('scrolled');
+  }
 
   private getTweets(query:string = ''):void {
     this.searchTerm = query;

@@ -1,4 +1,6 @@
-<ul class="data-list">
+<ul class="data-list" infinite-scroll 
+  [infiniteScrollDistance]="2" [infiniteScrollThrottle]="500"
+  (scrolled)="onScroll()">
   <li *ngFor="let tweet of tweets">
     <div class="list-item">
       <div class="legend-box {{tweet.sentiment.type}}"></div>

@@ -29,6 +29,10 @@ export class AppComponent {
     // and get the next set of tweets if at the bottom of the page
     let doc = event.target.documentElement;
     console.log(event);
-    console.log(`scrollTop: ${doc.scrollTop} scrollHeight: ${doc.scrollHeight} clientTop: ${doc.clientTop} clientHeight: ${doc.clientHeight} offsetHeight: ${doc.offsetHeight}`);
+    console.log(`scrollHeight: ${doc.scrollHeight}`);    
+    console.log(`scrollTop: ${doc.scrollTop}`);
+    console.log(`clientTop: ${doc.clientTop}`);
+    console.log(`clientHeight: ${doc.clientHeight}`);
+    console.log(`offsetHeight: ${doc.offsetHeight}`);
   }
 }
