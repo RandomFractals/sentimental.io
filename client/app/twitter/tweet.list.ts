@@ -37,7 +37,8 @@ export class TweetList implements OnInit {
   }  
 
   onScroll () {
-    console.log('scrolled');
+    console.log('tweet.list::scrolled');
+    this.getTweets(this.searchTerm);
   }
 
   private getTweets(query:string = ''):void {
