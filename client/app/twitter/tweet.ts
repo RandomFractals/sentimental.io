@@ -1,5 +1,5 @@
-import { User } from '../models/user';
-import { Sentiment } from '../models/sentiment';
+import { User } from './user';
+import { Sentiment } from '../shared/sentiment';
 
 /**
  * Defines simple Tweet type for this app.

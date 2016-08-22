@@ -3,8 +3,8 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import '../utils/rx.operators';
 
-import { Tweet } from '../models/tweet';
-import { User } from '../models/user';
+import { Tweet } from '../twitter/tweet';
+import { User } from '../twitter/user';
 
 @Injectable()
 export class TwitterService {

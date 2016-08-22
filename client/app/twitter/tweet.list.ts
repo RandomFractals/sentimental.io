@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Tweet } from './models/tweet';
-import { TwitterService } from './services/twitter.service';
-import { LinkPipe } from './utils/link.pipe';
-import { RoundPipe } from './utils/round.pipe';
+import { Tweet } from './tweet';
+import { TwitterService } from '../shared/twitter.service';
+
+import { LinkPipe } from '../utils/link.pipe';
+import { RoundPipe } from '../utils/round.pipe';
 
 @Component({
   selector: 'tweets',
-  templateUrl: 'app/tweet.list.html',
-  styleUrls: ['app/tweet.list.css'],
+  templateUrl: 'app/twitter/tweet.list.html',
+  styleUrls: ['app/twitter/tweet.list.css'],
   pipes: [LinkPipe, RoundPipe]
 })
 export class TweetList implements OnInit {
