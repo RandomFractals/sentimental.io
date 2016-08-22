@@ -56,7 +56,7 @@ function getTweets(queryParams, httpResponse) {
       } else {
         // TODO: do some error checking here first
         posts = tweets.statuses;
-        //log('getTweets', posts);
+        log('getTweets::searchMetadata: ', tweets.search_metadata);
         // let's async to get Alchemy sentiments from Watson 
         async.each(posts, getSentiment, function (err) {
           if (err) {
