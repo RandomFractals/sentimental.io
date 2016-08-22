@@ -15,11 +15,27 @@ export class TwitterService {
 
   search$ = this._searchTermSource.asObservable();
 
+  // last search term
+  private _searchTerm:string = '';
+
+  // last tweet id for pagination
+  private _lastTweetId:number = -1; 
+
   constructor (private http: Http) {
   }
 
+  /**
+   * Triggers new tweets search.
+   */
   search(query) {
-    this._searchTermSource.next(query);
+    if (this._searchTerm !== query) {
+      // reset search term and last tweet id
+      this._searchTerm = query;      
+      this._lastTweetId = -1;
+      console.log('search: new query: ' + query)
+    }
+    // notify clients about query change
+    this._searchTermSource.next(query);    
   }
 
 
@@ -28,8 +44,18 @@ export class TwitterService {
    */
   getTweets(query:string = ''): Observable<Tweet[]> 
   {
-    console.log(`getTweets: ${query}`)    
-    return this.http.get(`app/tweets/${query}`)
+    // construct tweets data query
+    let tweetsQuery:string = `app/tweets/${query}`;
+
+    console.log('lastTweetId: ' + this._lastTweetId);
+    if (this._lastTweetId > 0) {
+      // append last tweet id - 1 for pagination
+      tweetsQuery = tweetsQuery.concat('/', (this._lastTweetId - 1).toString());
+    } 
+    console.log(`getTweets: ${tweetsQuery}`);
+
+    // get tweets
+    return this.http.get(tweetsQuery)
                     .map(this.processTweets)
                     .catch(this.handleError);
   }
@@ -51,9 +77,12 @@ export class TwitterService {
   private processTweets(response: Response) {
     let results = response.json();
     let tweets: Tweet[] = []
-    results.forEach(tweet => { 
-      tweets.push(new Tweet(tweet));
-      console.log(tweet);
+    results.forEach(tweetData => {
+      let tweet:Tweet = new Tweet(tweetData);  
+      tweets.push(tweet);
+      this._lastTweetId = tweet.id;
+      console.log(this._lastTweetId); 
+      console.log(tweetData);
     });    
     console.log(tweets);
     return tweets;

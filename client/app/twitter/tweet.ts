@@ -6,6 +6,7 @@ import { Sentiment } from '../shared/sentiment';
  */
 export class Tweet {
 
+  id: number;
   user: User;
   text: string;
   createdAt: Date;
@@ -15,6 +16,7 @@ export class Tweet {
   data:any;
 
   constructor (tweetData:any) {
+    this.id = Number(tweetData.id);
     this.user = new User(tweetData.user);
     this.text = tweetData.text.valueOf();
     this.createdAt = new Date(tweetData.created_at);
