@@ -3,7 +3,12 @@
     <div class="title">sentimental.io</div>
     <!-- TODO: wire this to twitter service search -->
 		<div id="searchBox" class="search">
-			<input id="search" placeholder=" search for sentiments"/>
+			<form (ngSubmit)="onSubmit()" #searchForm="ngForm">
+    		<input type="text" [(ngModel)]="term"
+      		name="term"  #name="ngModel"
+					placeholder=" search for sentiments"/>
+  			<button type="button" class="btn" (click)="search()">Search</button>
+			</form>				
 		</div>
 	</div>
 	<!-- app content -->
