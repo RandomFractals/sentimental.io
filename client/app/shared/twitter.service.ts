@@ -19,7 +19,7 @@ export class TwitterService {
   private _searchTerm:string = '';
 
   // last tweet id for pagination
-  private _lastTweetId:number = -1; 
+  static LastTweetId:number = -1; 
 
   constructor (private http: Http) {
   }
@@ -31,7 +31,7 @@ export class TwitterService {
     if (this._searchTerm !== query) {
       // reset search term and last tweet id
       this._searchTerm = query;      
-      this._lastTweetId = -1;
+      TwitterService.LastTweetId = -1;
       console.log('search: new query: ' + query)
     }
     // notify clients about query change
@@ -40,17 +40,16 @@ export class TwitterService {
 
 
   /**
-   * Gets test tweets.
+   * Gets tweet results.
    */
   getTweets(query:string = ''): Observable<Tweet[]> 
   {
     // construct tweets data query
     let tweetsQuery:string = `app/tweets/${query}`;
 
-    console.log('lastTweetId: ' + this._lastTweetId);
-    if (this._lastTweetId > 0) {
+    if (TwitterService.LastTweetId > 0 && query.length > 0) {
       // append last tweet id - 1 for pagination
-      tweetsQuery = tweetsQuery.concat('/', (this._lastTweetId - 1).toString());
+      tweetsQuery = tweetsQuery.concat('/', (TwitterService.LastTweetId - 1).toString());
     } 
     console.log(`getTweets: ${tweetsQuery}`);
 
@@ -80,11 +79,13 @@ export class TwitterService {
     results.forEach(tweetData => {
       let tweet:Tweet = new Tweet(tweetData);  
       tweets.push(tweet);
-      this._lastTweetId = tweet.id;
-      console.log(this._lastTweetId); 
       console.log(tweetData);
     });    
     console.log(tweets);
+
+    // save last tweet id for pagination
+    TwitterService.LastTweetId = tweets[tweets.length-1].id;
+    
     return tweets;
   }
 
