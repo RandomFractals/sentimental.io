@@ -56,14 +56,21 @@ export class TweetList implements OnInit {
 
 
   /**
-   * Infinite scroll change handler
+   * Infinite scroll down change handler
    * for loading additional results.
    */
-  onScroll () {
-    console.log(`tweet.list::onScroll:NextTweetId: ${TwitterService.NextTweetId}`);
+  onScrollDown () {
+    console.log(`tweet.list::onScrollDown:NextTweetId: ${TwitterService.NextTweetId}`);
 
     // get additional search results
     this.getTweets(this.searchTerm);
+  }
+
+  /**
+   * Noop for scroll up, required by infinite scroll lib.
+   */
+  onScrollUp () {
+    console.log('tweet.list::onScrolledUp');
   }
 
 
