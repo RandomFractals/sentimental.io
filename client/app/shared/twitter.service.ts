@@ -19,10 +19,10 @@ export class TwitterService {
   private _searchTerm:string = 'Data Science'; // default search :)
 
   // last search response metadata
-  private _searchMetadata:Object = {};
+  private _searchMetadata:any = {};
 
-  // last tweet id for pagination
-  static LastTweetId:number = -1; 
+  // next tweet id for loading more results
+  static NextTweetId:string = '';
 
   constructor (private http: Http) {
   }
@@ -34,7 +34,7 @@ export class TwitterService {
     if (this._searchTerm !== query) {
       // reset search term and last tweet id
       this._searchTerm = query;      
-      TwitterService.LastTweetId = -1;
+      TwitterService.NextTweetId = '';
       console.log('search: new query: ' + query)
     }
     // notify clients about query change
@@ -50,9 +50,9 @@ export class TwitterService {
     // construct tweets data query
     let tweetsQuery:string = `app/tweets/${query}`;
 
-    if (TwitterService.LastTweetId > 0 && query.length > 0) {
-      // append last tweet id - 1 for pagination
-      tweetsQuery = tweetsQuery.concat('/', (TwitterService.LastTweetId - 1).toString());
+    if (TwitterService.NextTweetId.length > 0 && query.length > 0) {
+      // append next tweet id for getting more results
+      tweetsQuery = tweetsQuery.concat('/', TwitterService.NextTweetId);
     } 
     console.log(`getTweets: ${tweetsQuery}`);
 
@@ -81,14 +81,22 @@ export class TwitterService {
     let results = response.json();
 
     // get tweets
+    //console.log(results);
     let tweets: Array<Tweet> = new Array<Tweet>();
-    results.searchResults.forEach(tweetData => tweets.push(new Tweet(tweetData)));
+    results.searchResults.forEach(
+      tweetData => tweets.push(new Tweet(tweetData)));
+    console.log(tweets);
 
     // save search metadata for later data queries 
     this._searchMetadata = results.searchMetada;
 
-    // save last tweet id for pagination
-    TwitterService.LastTweetId = tweets[tweets.length-1].id;
+    // save next tweet id for getting more results
+    let nextResultsQuery:string = results.searchMetadata.next_results; 
+    console.log(nextResultsQuery);
+    TwitterService.NextTweetId = nextResultsQuery
+        .substring(8, nextResultsQuery.indexOf('&')); // '?max_id=' str length
+    
+    console.log(`processTweets::nextTweetId: ${TwitterService.NextTweetId}`);
     
     return tweets;
   }
