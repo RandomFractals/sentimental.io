@@ -48,11 +48,19 @@ export class TweetList implements OnInit {
 
 
   /**
+   * TrackBy ng function for tweets identity checks.
+   */
+  trackByTweetId(index:number, tweet:Tweet) {
+    return tweet.id;
+  }
+
+
+  /**
    * Infinite scroll change handler
    * for loading additional results.
    */
   onScroll () {
-    console.log('tweet.list::scrolled');
+    console.log(`tweet.list::onScroll:NextTweetId: ${TwitterService.NextTweetId}`);
 
     // get additional search results
     this.getTweets(this.searchTerm);
