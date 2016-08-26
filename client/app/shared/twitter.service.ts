@@ -85,7 +85,7 @@ export class TwitterService {
     let tweets: Array<Tweet> = new Array<Tweet>();
     results.searchResults.forEach(
       tweetData => tweets.push(new Tweet(tweetData)));
-    console.log(tweets);
+    //console.log(tweets);
 
     // save search metadata for later data queries 
     this._searchMetadata = results.searchMetada;
