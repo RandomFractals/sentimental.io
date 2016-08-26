@@ -34,7 +34,8 @@ router.get('/app/tweets/:query?/:maxId?', function(request, response, next) {
 
   if (request.params.maxId) {
     // add max id to get older tweets
-    queryParams.max_id = request.params.maxId; 
+    queryParams.max_id = request.params.maxId;
+    queryParams.include_entities = 1;
   }
 
   // get tweets 
